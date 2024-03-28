@@ -7,7 +7,9 @@
                 <h3 class="box-title">Sliders</h3>
 
                 <div align="right">
-                    <a href="{{route('slider.create')}}"><button class="btn btn-success">Ekle</button></a>
+                    <a href="{{route('slider.create')}}">
+                        <button class="btn btn-success">Ekle</button>
+                    </a>
                 </div>
             </div>
             <div class="box-body">
@@ -19,12 +21,16 @@
                         <th></th>
                         <th></th>
                     </tr>
+                    </thead>
                     <tbody id="sortable">
                     @foreach($data['slider'] as $slider)
                         <tr id="item-{{$slider->id}}">
-                            <td class="sortable" width="150"><img width="150" src="/images/sliders/{{$slider->slider_file}}" alt=""></td>
+                            <td class="sortable" width="150"><img width="150"
+                                                                  src="/images/sliders/{{$slider->slider_file}}" alt="">
+                            </td>
                             <td>{{$slider['slider_title']}}</td>
-                            <td width="5"><a href="{{route('slider.edit',$slider->id)}}"><i class="fa fa-pencil-square"></i></a></td>
+                            <td width="5"><a href="{{route('slider.edit',$slider->id)}}"><i
+                                        class="fa fa-pencil-square"></i></a></td>
                             <td width="5">
                                 <a href="javascript:void(0)"><i id="@php echo $slider->id @endphp"
                                                                 class="fa fa-trash-o"></i></a>
@@ -32,7 +38,6 @@
                         </tr>
                     @endforeach
                     </tbody>
-                    </thead>
                 </table>
             </div>
         </div>
@@ -78,20 +83,19 @@
             alertify.confirm('Silme işlemini onaylayın!', 'Bu işlem geri alınamaz',
                 function () {
 
-                $.ajax({
-                    type:"DELETE",
-                    url:"slider/"+destroy_id,
-                    success: function (msg) {
-                        if (msg)
-                        {
-                            $("#item-"+destroy_id).remove();
-                            alertify.success("Silme İşlemi Başarılı");
+                    $.ajax({
+                        type: "DELETE",
+                        url: "slider/" + destroy_id,
+                        success: function (msg) {
+                            if (msg) {
+                                $("#item-" + destroy_id).remove();
+                                alertify.success("Silme İşlemi Başarılı");
 
-                        } else {
-                            alertify.error("İşlem Tamamlanamadı");
+                            } else {
+                                alertify.error("İşlem Tamamlanamadı");
+                            }
                         }
-                    }
-                });
+                    });
 
                 },
                 function () {
@@ -101,8 +105,6 @@
 
         });
     </script>
-
-
 
 @endsection
 @section('css')@endsection
